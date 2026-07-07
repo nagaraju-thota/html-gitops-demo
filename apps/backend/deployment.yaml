@@ -33,13 +33,13 @@ spec:
             - name: APP_NAME
               valueFrom:
                 secretKeyRef:
-                  name: frontend-secret
+                  name: backend-secret
                   key: APP_NAME
 
             - name: APP_ENV
               valueFrom:
                 secretKeyRef:
-                  name: frontend-secret
+                  name: backend-secret
                   key: APP_ENV
 
           volumeMounts:
@@ -49,4 +49,4 @@ spec:
       volumes:
         - name: html-volume
           configMap:
-            name: frontend-html
+            name: backend-html
