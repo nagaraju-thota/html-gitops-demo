@@ -21,7 +21,7 @@ data:
 
         <h2>GitOps Demo using Argo CD</h2>
 
-        <p>Version : 2.0.2</p>
+        <p>Version : 5.0.0</p>
 
         <p>This represents a backend service deployed using GitOps.</p>
 
