@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: frontend
-  namespace: frontend
+  name: backend
+  namespace: backend
   annotations:
     argocd.argoproj.io/sync-wave: "2"
 
@@ -12,16 +12,16 @@ spec:
 
   selector:
     matchLabels:
-      app: frontend
+      app: backend
 
   template:
     metadata:
       labels:
-        app: frontend
+        app: backend
 
     spec:
       containers:
-        - name: frontend
+        - name: backend
 
           image: nginx:latest
           imagePullPolicy: IfNotPresent
