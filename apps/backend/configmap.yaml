@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: backend-html
+  namespace: backend
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Backend Application</title>
+    </head>
+
+    <body style="font-family:Arial;text-align:center;margin-top:80px;">
+
+        <h1>⚙️ Backend Application</h1>
+
+        <h2>GitOps Demo using Argo CD</h2>
+
+        <p>Version : 1.0.0</p>
+
+        <p>This represents a backend service deployed using GitOps.</p>
+
+        <ul style="display:inline-block;text-align:left;">
+            <li>Docker Desktop Kubernetes</li>
+            <li>Argo CD</li>
+            <li>GitHub</li>
+            <li>Kustomize</li>
+        </ul>
+
+    </body>
+    </html>

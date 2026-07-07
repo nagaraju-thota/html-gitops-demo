@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-html
+  namespace: frontend
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Frontend Application</title>
+    </head>
+    <body style="font-family:Arial;text-align:center;margin-top:80px;">
+        <h1>🚀 Frontend Application</h1>
+        <h2>GitOps Demo using Argo CD</h2>
+
+        <p>Version : 1.0.0</p>
+
+        <p>This application is deployed using:</p>
+
+        <ul style="display:inline-block;text-align:left;">
+            <li>Docker Desktop Kubernetes</li>
+            <li>Argo CD</li>
+            <li>GitHub</li>
+            <li>Kustomize</li>
+        </ul>
+
+    </body>
+    </html>

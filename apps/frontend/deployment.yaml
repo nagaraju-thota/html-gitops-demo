@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: frontend
+  namespace: frontend
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: frontend
+
+  template:
+    metadata:
+      labels:
+        app: frontend
+
+    spec:
+      containers:
+      - name: frontend
+
+        image: nginx:latest
+
+        imagePullPolicy: IfNotPresent
+
+        ports:
+        - containerPort: 80
+
+        env:
+        - name: APP_NAME
+          valueFrom:
+            secretKeyRef:
+              name: frontend-secret
+              key: APP_NAME
+
+        - name: APP_ENV
+          valueFrom:
+            secretKeyRef:
+              name: frontend-secret
+              key: APP_ENV
+
+        volumeMounts:
+        - name: html-volume
+          mountPath: /usr/share/nginx/html/index.html
+          subPath: index.html
+
+      volumes:
+      - name: html-volume
+        configMap:
+          name: frontend-html

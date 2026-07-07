@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: backend
+  namespace: backend
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: backend
+
+  template:
+    metadata:
+      labels:
+        app: backend
+
+    spec:
+      containers:
+        - name: backend
+
+          image: nginx:latest
+
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - containerPort: 80
+
+          env:
+            - name: APP_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: APP_NAME
+
+            - name: APP_ENV
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: APP_ENV
+
+          volumeMounts:
+            - name: html-volume
+              mountPath: /usr/share/nginx/html/index.html
+              subPath: index.html
+
+      volumes:
+        - name: html-volume
+          configMap:
+            name: backend-html
